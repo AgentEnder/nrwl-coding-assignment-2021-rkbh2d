@@ -1,0 +1,24 @@
+/* You can add global styles to this file, and also import other style files */
+@import '@angular/material/prebuilt-themes/deeppurple-amber.css';
+@import '~bootstrap/dist/css/bootstrap.css';
+
+body {
+    margin: 0;
+}
+
+.panel {
+    max-width: 1200px;
+    min-width: 800px;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    padding: 2rem;
+    width: 100%;
+}
+
+a.no-highlight {
+    color: whitesmoke;
+    text-decoration: none;
+  }

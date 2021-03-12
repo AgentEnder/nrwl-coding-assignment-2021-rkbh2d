@@ -1,0 +1,1 @@
+export * from './ticket-detail-page/ticket-detail-page.component';

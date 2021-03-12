@@ -1,0 +1,11 @@
+mat-card {
+    margin: 1rem;
+
+    ::ng-deep .mat-card-header-text {
+        width: 100%;
+    }
+}
+
+:host {
+    display: block;
+}

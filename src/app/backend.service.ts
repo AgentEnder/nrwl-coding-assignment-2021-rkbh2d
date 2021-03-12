@@ -1,43 +1,31 @@
 import { Injectable } from "@angular/core";
 import { Observable, of, throwError } from "rxjs";
 import { delay, tap } from "rxjs/operators";
-
-/**
- * This service acts as a mock backend.
- *
- * You are free to modify it as you see.
- */
-
-export type User = {
-  id: number;
-  name: string;
-};
-
-export type Ticket = {
-  id: number;
-  description: string;
-  assigneeId: number;
-  completed: boolean;
-};
+import { Ticket } from "./models";
+import { User } from "./models";
 
 function randomDelay() {
   return Math.random() * 1000;
 }
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class BackendService {
   storedTickets: Ticket[] = [
     {
       id: 0,
-      description: "Install a monitor arm",
+      description: "Install a monitor arm. Id est voluptate ea aute. Ea laborum velit ea aute irure elit amet cillum fugiat dolor.",
       assigneeId: 111,
-      completed: false
+      completed: false,
+      title: 'Monitor Arm Installation'
     },
     {
       id: 1,
-      description: "Move the desk to the new location",
+      description: "Move the desk to the new location. Esse nulla reprehenderit non amet.",
       assigneeId: 111,
-      completed: false
+      completed: false,
+      title: "Desk Relocation"
     }
   ];
 
@@ -69,10 +57,11 @@ export class BackendService {
     return of(this.findUserById(id)).pipe(delay(randomDelay()));
   }
 
-  newTicket(payload: { description: string }) {
+  newTicket(payload: TicketCreationDTO) {
     const newTicket: Ticket = {
       id: ++this.lastId,
       description: payload.description,
+      title: payload.title,
       assigneeId: null,
       completed: false
     };
@@ -106,3 +95,5 @@ export class BackendService {
     return of(updatedTicket).pipe(delay(randomDelay()));
   }
 }
+
+export type TicketCreationDTO = { description: string; title: string };

@@ -1,5 +1,9 @@
 import { Component } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 import {BackendService} from './backend.service';
+import { CacheState } from './state';
 
 @Component({
   selector: 'app-root',
@@ -7,8 +11,11 @@ import {BackendService} from './backend.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  tickets = this.backend.tickets();
-  users = this.backend.users();
+  loading$: Observable<boolean>
 
-  constructor(private backend: BackendService) {}
+  constructor(private store: Store) {
+    this.loading$ = store.select(CacheState.selectCacheState).pipe(
+      map((x: CacheState.State) => x.loadingUsers || x.loadingTickets)
+    )
+  }
 }

@@ -1,0 +1,43 @@
+<div class="container">
+    <div class="panel mat-elevation-z4">
+        <div class="d-flex m-4">
+            <mat-form-field>
+                <mat-label>Filter</mat-label>
+                <input matInput [formControl]="filterFormControl">
+              </mat-form-field>
+            <div class="ml-auto">
+                <button mat-raised-button [color]="'primary'" (click)="addTicket()"><mat-icon>add</mat-icon></button>
+            </div>
+        </div>
+        <div class="ticket-list-grid">
+            <div class="">
+                <h2>Incomplete</h2>
+                <div
+                    cdkDropList
+                    #incompleteList="cdkDropList"
+                    [cdkDropListData]="incompleteTickets"
+                    [cdkDropListConnectedTo]="[completedList]"
+                    class="drop-list"
+                    (cdkDropListDropped)="drop($event, false)"
+                >
+                    <app-ticket-card *ngFor="let item of incompleteTickets" [ticket]="item" cdkDrag>
+                    </app-ticket-card>
+                </div>
+            </div>
+            <div class="">
+                <h2>Complete</h2>
+                <div
+                    cdkDropList
+                    #completedList="cdkDropList"
+                    [cdkDropListData]="completeTickets"
+                    [cdkDropListConnectedTo]="[incompleteList]"
+                    class="drop-list"
+                    (cdkDropListDropped)="drop($event, true)"
+                >
+                    <app-ticket-card  *ngFor="let item of completeTickets" [ticket]="item" cdkDrag>
+                    </app-ticket-card>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

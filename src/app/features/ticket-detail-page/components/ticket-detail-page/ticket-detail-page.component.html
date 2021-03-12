@@ -1,0 +1,25 @@
+<div class="container">
+    <div class="panel">
+        <h1>{{ ticket?.title }}</h1>
+        <p>{{ ticket?.description }}</p>
+        <mat-form-field>
+            <mat-label>Assignee</mat-label>
+            <input
+                type="text"
+                placeholder="Pick one"
+                aria-label="Number"
+                matInput
+                [formControl]="assigneeControl"
+                [matAutocomplete]="auto"
+            />
+            <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" [displayWith]="displayWithFn">
+                <mat-option
+                    *ngFor="let option of users$ | async"
+                    [value]="option.id"
+                >
+                    {{ option.name }}
+                </mat-option>
+            </mat-autocomplete>
+        </mat-form-field>
+    </div>
+</div>

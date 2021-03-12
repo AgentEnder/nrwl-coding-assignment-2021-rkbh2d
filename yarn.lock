@@ -125,6 +125,22 @@
     ora "5.1.0"
     rxjs "6.6.3"
 
+"@angular/animations@^11.2.5":
+  version "11.2.5"
+  resolved "https://registry.yarnpkg.com/@angular/animations/-/animations-11.2.5.tgz#f964a5dc7667a84b0431bddfbb5a61934040f501"
+  integrity sha512-VcXfIlgJNOYl0eR/oY8uJ2PN0aIAZBKpXCQv4giQ1Cz1oC9GaHq1OnU1Y+WGB4vW9BsNSkib+MTdDRlMXhyAtA==
+  dependencies:
+    tslib "^2.0.0"
+
+"@angular/cdk@^11.2.4":
+  version "11.2.4"
+  resolved "https://registry.yarnpkg.com/@angular/cdk/-/cdk-11.2.4.tgz#7b2afc2609625383903ae458bf67640aa2179b9c"
+  integrity sha512-BcMHRaKZxkpK+dPwmjqktAzWUnywbyHyrORGlF4OMtbE88IvbI8tQ+0xANfBm0cPaAm+na5AlGKyH2ptzedyRQ==
+  dependencies:
+    tslib "^2.0.0"
+  optionalDependencies:
+    parse5 "^5.0.0"
+
 "@angular/cli@~11.0.7":
   version "11.0.7"
   resolved "https://registry.yarnpkg.com/@angular/cli/-/cli-11.0.7.tgz#b1c35cd23eeb966dabb575c7ff41111507113147"
@@ -214,6 +230,13 @@
   version "11.0.9"
   resolved "https://registry.yarnpkg.com/@angular/language-service/-/language-service-11.0.9.tgz#44a2999992187de8ba978724807220909021afc2"
   integrity sha512-wmt/siAwHUMNIXeu4OCW3z6JtP/VoJLkiQXDfSnetuCfHwy401b72L4h+TWiX3x2ZLzeYwmi0sbqMb5UCctrIw==
+
+"@angular/material@^11.2.4":
+  version "11.2.4"
+  resolved "https://registry.yarnpkg.com/@angular/material/-/material-11.2.4.tgz#3ec538414aa23e94dcbc89c6fa8ec5c9e03ba49f"
+  integrity sha512-OrngpFQpl7QvnIAOnbbnwWgOl7xlIcVPYi4fTfjioGKa1D+YWtrnYR6RCGoStbv2WZLDJwhPz0pMyPQWdJ0q/A==
+  dependencies:
+    tslib "^2.0.0"
 
 "@angular/platform-browser-dynamic@11.0.9":
   version "11.0.9"
@@ -1121,6 +1144,20 @@
     merge-source-map "^1.1.0"
     schema-utils "^2.7.0"
 
+"@ngrx/effects@^11.0.1":
+  version "11.0.1"
+  resolved "https://registry.yarnpkg.com/@ngrx/effects/-/effects-11.0.1.tgz#54d272e7bca411eaad5de144c67876beaba99b5f"
+  integrity sha512-FJa0WVr0PcPgFXCv8i//RDAVV26pl0ieOLH3yDnZN0BH6/cDeUcKtWsWv+IAiJ63dFm9VedgNgwVo0I7CP9G+g==
+  dependencies:
+    tslib "^2.0.0"
+
+"@ngrx/store@^11.0.1":
+  version "11.0.1"
+  resolved "https://registry.yarnpkg.com/@ngrx/store/-/store-11.0.1.tgz#fd229b704bb9847ddd2c299cf26eb19017aa7f9a"
+  integrity sha512-ULk+z7fXg1S0mbSXatHplvg8Rqj9Hglo6pVugaDgLdFR3DD5Wpl0cefvLBscaeZF9DGrLBoPZVlFq/LACRr6tA==
+  dependencies:
+    tslib "^2.0.0"
+
 "@ngtools/webpack@11.0.7":
   version "11.0.7"
   resolved "https://registry.yarnpkg.com/@ngtools/webpack/-/webpack-11.0.7.tgz#3ec8cd967fdf1dfc79e6b1469369148bc3a93bd1"
@@ -1221,10 +1258,10 @@
   resolved "https://registry.yarnpkg.com/@types/node/-/node-14.14.20.tgz#f7974863edd21d1f8a494a73e8e2b3658615c340"
   integrity sha512-Y93R97Ouif9JEOWPIUyU+eyIdyRqQR0I8Ez1dzku4hDx34NWh4HbtIc3WNzwB1Y9ULvNGeu5B8h8bVL5cAk4/A==
 
-"@types/node@~8.9.4":
-  version "8.9.5"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-8.9.5.tgz#162b864bc70be077e6db212b322754917929e976"
-  integrity sha512-jRHfWsvyMtXdbhnz5CVHxaBgnV6duZnPlQuRSo/dm/GnmikNcmZhxIES4E9OZjUmQ8C+HCl4KJux+cXN/ErGDQ==
+"@types/node@^14.14.33":
+  version "14.14.33"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-14.14.33.tgz#9e4f8c64345522e4e8ce77b334a8aaa64e2b6c78"
+  integrity sha512-oJqcTrgPUF29oUP8AsUqbXGJNuPutsetaa9kTQAQce5Lx5dTYWV02ScBiT/k1BX/Z7pKeqedmvp39Wu4zR7N7g==
 
 "@types/parse-json@^4.0.0":
   version "4.0.0"
@@ -1989,6 +2026,11 @@ boolbase@^1.0.0, boolbase@~1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/boolbase/-/boolbase-1.0.0.tgz#68dff5fbe60c51eb37725ea9e3ed310dcc1e776e"
   integrity sha1-aN/1++YMUes3cl6p4+0xDcwed24=
+
+bootstrap@^4.6.0:
+  version "4.6.0"
+  resolved "https://registry.yarnpkg.com/bootstrap/-/bootstrap-4.6.0.tgz#97b9f29ac98f98dfa43bf7468262d84392552fd7"
+  integrity sha512-Io55IuQY3kydzHtbGvQya3H+KorS/M9rSNyfCGCg9WZ4pyT/lCxIlpJgG1GXW/PswzC84Tr2fBYi+7+jFVQQBw==
 
 brace-expansion@^1.1.7:
   version "1.1.11"
@@ -6705,6 +6747,11 @@ parse5-sax-parser@^6.0.1:
   integrity sha512-kXX+5S81lgESA0LsDuGjAlBybImAChYRMT+/uKCEXFBFOeEhS52qUCydGhU3qLRD8D9DVjaUo821WK7DM4iCeg==
   dependencies:
     parse5 "^6.0.1"
+
+parse5@^5.0.0:
+  version "5.1.1"
+  resolved "https://registry.yarnpkg.com/parse5/-/parse5-5.1.1.tgz#f68e4e5ba1852ac2cadc00f4555fff6c2abb6178"
+  integrity sha512-ugq4DFI0Ptb+WWjAdOK16+u/nHfiIrcE+sh8kZMaM0WllQKLI9rOUq6c2b7cwPkXdzfQESqvoqK6ug7U/Yyzug==
 
 parse5@^6.0.1:
   version "6.0.1"
