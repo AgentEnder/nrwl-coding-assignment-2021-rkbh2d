@@ -1,10 +1,18 @@
-import { Component, OnInit } from "@angular/core";
+import { ChangeDetectorRef, Component, OnInit } from "@angular/core";
 import { FormControl } from "@angular/forms";
 import { ActivatedRoute } from "@angular/router";
 
 import { Store } from "@ngrx/store";
-import { combineLatest, Observable } from "rxjs";
-import { filter, map, startWith, take, takeUntil } from "rxjs/operators";
+import { combineLatest, EMPTY, Observable } from "rxjs";
+import {
+    filter,
+    map,
+    startWith,
+    take,
+    takeUntil,
+    tap,
+    withLatestFrom,
+} from "rxjs/operators";
 
 import { Ticket, User } from "../../../../models";
 import { CacheActions, CacheState } from "../../../../state";
@@ -15,7 +23,8 @@ import { BaseComponent } from "../../../shared";
     templateUrl: "./ticket-detail-page.component.html",
 })
 export class TicketDetailPageComponent extends BaseComponent implements OnInit {
-    ticket: Ticket;
+    ticket$: Observable<Ticket> = EMPTY;
+    selectedTicketId$: Observable<number>;
     users$: Observable<User[]>;
     users: User[];
 
@@ -33,24 +42,10 @@ export class TicketDetailPageComponent extends BaseComponent implements OnInit {
                 this.store.dispatch(CacheActions.selectTicket({ ticketId: x }));
             });
 
-        store
-            .select(CacheState.selectSelectedTicket)
-            .pipe(takeUntil(this.destroy$))
-            .subscribe((x) => {
-                this.ticket = x;
-                this.assigneeControl.setValue(this.ticket?.assigneeId);
-            });
-
-        store
-            .select(CacheState.selectTickets)
-            .pipe(take(1))
-            .subscribe((x) => {
-                if (x.length === 0) {
-                    this.store.dispatch(CacheActions.loadTickets({}));
-                }
-            });
+        this.store.dispatch(CacheActions.ticketDetailPageLoaded());
 
         const storedUsers = store.select(CacheState.selectUsers);
+        storedUsers.subscribe(x => this.users = x);
 
         this.users$ = combineLatest([
             storedUsers,
@@ -62,17 +57,20 @@ export class TicketDetailPageComponent extends BaseComponent implements OnInit {
             map(([users, filterValue]) => filterUsers(users, filterValue)),
             takeUntil(this.destroy$)
         );
-        storedUsers.subscribe((x) => (this.users = x));
 
         this.assigneeControl.valueChanges
-            .pipe(takeUntil(this.destroy$))
-            .subscribe((x) => {
+            .pipe(withLatestFrom(this.ticket$), takeUntil(this.destroy$))
+            .subscribe(([x, ticket]) => {
                 var id = typeof x === "number" ? x : null;
-                if ((x !== this.ticket?.assigneeId) && this.ticket?.id !== undefined && id !== undefined) {
+                if (
+                    x !== ticket?.assigneeId &&
+                    ticket?.id !== undefined &&
+                    id !== undefined
+                ) {
                     this.store.dispatch(
                         CacheActions.updateTicket({
                             ticket: {
-                                ...this.ticket,
+                                ...ticket,
                                 assigneeId: id,
                             },
                         })
@@ -81,9 +79,17 @@ export class TicketDetailPageComponent extends BaseComponent implements OnInit {
             });
     }
 
-    ngOnInit(): void {}
+    ngOnInit(): void {
+        this.ticket$ = this.store.select(CacheState.selectSelectedTicket).pipe(
+            tap((ticket) => {
+                this.assigneeControl.setValue(ticket?.assigneeId);
+            })
+        );
+    }
 
-    displayWithFn = (id) => this.users?.find((x) => x.id === id)?.name;
+    displayWithFn = (id) => {
+        return this.users?.find((x) => x.id === id)?.name;
+    }
 }
 
 function filterUsers(users: User[], filterValue: any): any {

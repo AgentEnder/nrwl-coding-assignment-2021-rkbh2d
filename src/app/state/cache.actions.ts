@@ -20,4 +20,6 @@ export namespace CacheActions {
     export const loadUsers = createAction('[@app/core] load users');
     export const loadUsersSuccess = createAction('[@app/core] load users success', props<{users: User[]}>());
     export const loadUsersFailed = createAction('[@app/core] load users failed', props<{error: any}>());
+
+    export const ticketDetailPageLoaded = createAction('[@app/ticket-detail] page loaded');
 }

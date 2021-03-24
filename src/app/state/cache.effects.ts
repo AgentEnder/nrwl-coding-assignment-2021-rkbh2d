@@ -2,12 +2,13 @@ import { Injectable } from "@angular/core";
 import { tick } from "@angular/core/testing";
 
 import { Actions, createEffect, ofType, OnInitEffects } from "@ngrx/effects";
-import { Action } from "@ngrx/store";
+import { Action, Store } from "@ngrx/store";
 import { of } from "rxjs";
-import { catchError, map, switchMap } from "rxjs/operators";
+import { catchError, filter, map, switchMap, withLatestFrom } from "rxjs/operators";
 
 import { BackendService } from "../backend.service";
 import { CacheActions } from "./cache.actions";
+import { CacheState } from "./cache.state";
 
 @Injectable({
     providedIn: "root",
@@ -15,7 +16,8 @@ import { CacheActions } from "./cache.actions";
 export class CoreEffects implements OnInitEffects {
     constructor(
         private actions$: Actions,
-        private backendService: BackendService
+        private backendService: BackendService,
+        private store: Store
     ) {}
 
     ngrxOnInitEffects(): Action {
@@ -87,5 +89,13 @@ export class CoreEffects implements OnInitEffects {
                 );
             })
         );
+    });
+
+    loadTicketsOnDetailPageLoadIfNotLoaded$ = createEffect(() => {
+        return this.actions$.pipe(
+                ofType(CacheActions.ticketDetailPageLoaded),
+                withLatestFrom(this.store.select(CacheState.selectTickets)),
+                filter(([action, tickets]) => tickets.length === 0),
+                map(x => CacheActions.loadTickets({})));
     });
 }

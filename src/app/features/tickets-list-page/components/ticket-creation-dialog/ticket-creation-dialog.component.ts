@@ -3,7 +3,9 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import { MatDialogRef } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
-import { CacheActions } from 'src/app/state';
+import { EMPTY, Observable, Subscription } from 'rxjs';
+import { User } from 'src/app/models';
+import { CacheActions, CacheState } from 'src/app/state';
 
 @Component({
     selector: 'app-ticket-creation-dialog',
@@ -13,10 +15,15 @@ export class TicketCreationDialogComponent implements OnInit {
 
     f = new FormGroup({
         title: new FormControl('', Validators.required),
-        description: new FormControl()
+        description: new FormControl(),
+        assigneeId: new FormControl()
     })
 
-    constructor( public dialogRef: MatDialogRef<TicketCreationDialogComponent>, private store: Store) { }
+    users$: Observable<User[]> = EMPTY;
+
+    constructor( public dialogRef: MatDialogRef<TicketCreationDialogComponent>, private store: Store) {
+        this.users$ = store.select(CacheState.selectUsers)
+     }
 
     ngOnInit(): void { }
 

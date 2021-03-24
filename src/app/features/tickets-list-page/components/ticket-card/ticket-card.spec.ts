@@ -40,6 +40,7 @@ describe("Ticket Card", () => {
             imports: [MatCardModule, RouterModule.forRoot([])],
         }).compileComponents();
     }));
+
     it("should create ticket card", async(() => {
         const fixture = TestBed.createComponent(TicketCardComponent);
         fixture.componentInstance.ticket = MOCK_TICKET
@@ -73,7 +74,7 @@ describe("Ticket Card", () => {
         expect(outputDiv.nativeElement.innerHTML.trim()).toEqual(MOCK_USER.name);
     }));
 
-    it("ticket card should teardown subscriptions", waitForAsync(() => {
+    it("ticket card should notify on destroy", waitForAsync(() => {
         const fixture = TestBed.createComponent(TicketCardComponent);
 
         spyOn(fixture.componentInstance.destroy$, 'next');

@@ -1,5 +1,5 @@
 <div class="container">
-    <div class="panel">
+    <div class="panel" *ngIf="ticket$| async as ticket">
         <h1>{{ ticket?.title }}</h1>
         <p>{{ ticket?.description }}</p>
         <mat-form-field>
@@ -12,7 +12,7 @@
                 [formControl]="assigneeControl"
                 [matAutocomplete]="auto"
             />
-            <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" [displayWith]="displayWithFn">
+            <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayWithFn">
                 <mat-option
                     *ngFor="let option of users$ | async"
                     [value]="option.id"

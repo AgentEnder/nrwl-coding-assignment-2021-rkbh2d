@@ -5,13 +5,14 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
 
 import { MatCardModule } from '@angular/material/card';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatSelectModule } from '@angular/material/select';
 
 import { SharedModule } from '../shared';
 import { COMPONENTS } from './components';
 import {
     TicketsListPageComponent
 } from './components/tickets-list-page/tickets-list-page.component';
-import { MatDialogModule } from '@angular/material/dialog';
 
 const routes: Routes = [
     {
@@ -29,7 +30,8 @@ const routes: Routes = [
         SharedModule,
         MatCardModule,
         MatDialogModule,
-        ReactiveFormsModule
+        MatSelectModule,
+        ReactiveFormsModule,
     ],
 })
 export class TicketsListPageModule {}

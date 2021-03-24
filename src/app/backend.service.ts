@@ -5,7 +5,7 @@ import { Ticket } from "./models";
 import { User } from "./models";
 
 function randomDelay() {
-  return Math.random() * 1000;
+  return Math.random() * 100;
 }
 
 @Injectable({
@@ -62,7 +62,7 @@ export class BackendService {
       id: ++this.lastId,
       description: payload.description,
       title: payload.title,
-      assigneeId: null,
+      assigneeId: payload.assigneeId,
       completed: false
     };
 
@@ -96,4 +96,4 @@ export class BackendService {
   }
 }
 
-export type TicketCreationDTO = { description: string; title: string };
+export type TicketCreationDTO = { description: string; title: string; assigneeId: number };
